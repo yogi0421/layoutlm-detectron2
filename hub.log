@@ -1,0 +1,55 @@
+Loading /usr/local/etc/jupyterhub/secret/values.yaml
+No config at /usr/local/etc/jupyterhub/existing-secret/values.yaml
+Loading extra config: customProfileMetrics
+[E 2024-06-04 08:05:46.675 JupyterHub app:3408]
+    Traceback (most recent call last):
+      File "/usr/local/lib/python3.11/site-packages/jupyterhub/app.py", line 3405, in launch_instance_async
+        await self.initialize(argv)
+      File "/usr/local/lib/python3.11/site-packages/jupyterhub/app.py", line 2883, in initialize
+        self.load_config_file(self.config_file)
+      File "/usr/local/lib/python3.11/site-packages/traitlets/config/application.py", line 118, in inner
+        return method(app, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/usr/local/lib/python3.11/site-packages/traitlets/config/application.py", line 958, in load_config_file
+        for config, fname in self._load_config_files(
+      File "/usr/local/lib/python3.11/site-packages/traitlets/config/application.py", line 915, in _load_config_files
+        config = loader.load_config()
+                 ^^^^^^^^^^^^^^^^^^^^
+      File "/usr/local/lib/python3.11/site-packages/traitlets/config/loader.py", line 622, in load_config
+        self._read_file_as_dict()
+      File "/usr/local/lib/python3.11/site-packages/traitlets/config/loader.py", line 655, in _read_file_as_dict
+        exec(compile(f.read(), conf_filename, "exec"), namespace, namespace)  # noqa: S102
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/usr/local/etc/jupyterhub/jupyterhub_config.py", line 497, in <module>
+        exec(config_py)
+      File "<string>", line 69, in <module>
+      File "<string>", line 58, in setup_metrics
+      File "<string>", line 46, in collect_profile_metrics
+      File "<string>", line 13, in get_running_users
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/api/core_v1_api.py", line 15823, in list_namespaced_pod
+        return self.list_namespaced_pod_with_http_info(namespace, **kwargs)  # noqa: E501
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/api/core_v1_api.py", line 15942, in list_namespaced_pod_with_http_info
+        return self.api_client.call_api(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/api_client.py", line 348, in call_api
+        return self.__call_api(resource_path, method,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/api_client.py", line 180, in __call_api
+        response_data = self.request(
+                        ^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/api_client.py", line 373, in request
+        return self.rest_client.GET(url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/rest.py", line 244, in GET
+        return self.request("GET", url,
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+      File "/home/jovyan/.local/lib/python3.11/site-packages/kubernetes/client/rest.py", line 238, in request
+        raise ApiException(http_resp=r)
+    kubernetes.client.exceptions.ApiException: (403)
+    Reason: Forbidden
+    HTTP response headers: HTTPHeaderDict({'Audit-Id': '60de7ecb-eacc-4c11-ab24-481652540f5c', 'Cache-Control': 'no-cache, private', 'Content-Type': 'application/json', 'X-Content-Type-Options': 'nosniff', 'X-Kubernetes-Pf-Flowschema-Uid': 'a8b7de32-3ee9-4b6c-b77d-fb29a92b1114', 'X-Kubernetes-Pf-Prioritylevel-Uid': '7a1dbf87-36e7-4554-80ff-8d665283e657', 'Date': 'Tue, 04 Jun 2024 08:05:46 GMT', 'Content-Length': '281'})
+    HTTP response body: {"kind":"Status","apiVersion":"v1","metadata":{},"status":"Failure","message":"pods is forbidden: User \"system:serviceaccount:jupyterhub:hub\" cannot list resource \"pods\" in API group \"\" in the namespace \"jupyter\"","reason":"Forbidden","details":{"kind":"pods"},"code":403}
+    
+    
+    
