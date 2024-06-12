@@ -8,6 +8,7 @@ torch==1.10.1
 opencv-python==4.5.5.64
 pillow=9.5.0
 onnxoptimizer
+torchvision==0.10.1
 'git+https://github.com/facebookresearch/detectron2.git@5aeb252b194b93dc2879b4ac34bc51a31b5aee13'
 layoutparser
 ```
